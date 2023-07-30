@@ -81,3 +81,39 @@ DO NOT include any other text on a line in which these inputs are defined.
 If you would like to customize your keybinds you can do so in any of the Controls text files.
 
 If you mess up these files too much and start getting crashes, just delete them, and the script will fix it for you.
+
+Here is a list of the default controls.
+
+Shoot/attack = left mouse
+ADS/Zoom = right mouse
+Reload = R key
+Interact = E key
+Crouch = Left Control
+Sprint = Right Shift
+
+COD:
+Swap weapon (COD) = 1 key
+Swap to grenade (COD) = 2 key
+Swap Grenade Type (COD) = q key
+Swap To Melee (COD) = f key
+
+DEM:
+Next Weapon (DEM) = Mouse side button M5
+Items (DEM) = G
+Resume (DEM) = 2 key
+Map (DEM) = M key
+Jump (DEM2) = space bar
+Flashlight (DEM2) = f key
+Equipment (DEM2) = 1 key
+Notepad (DEM1) = Q key
+Hotbar 1 - Hotbar 8 (DEM1) = 1 key through 8 key 
+
+MPH:
+Screen Tap Jump (MPH) = RIGHT CONTROL
+Jump (MPH) = Space bar
+Ball (MPH) = LEFT CONTROL
+Scan vision (MPH) = V key
+Special Weapon (MPH) 1 - 6 = 1 - 6 keys
+Swap to main weapon (MPH) = Q key
+Swap to missiles (MPH) = E key
+Swap to third weapon = R key
