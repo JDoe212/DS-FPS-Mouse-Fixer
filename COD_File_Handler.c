@@ -39,6 +39,13 @@ void GenerateInputs_COD(FILE *inputFile, struct Input* inputList)
         inputList[i].isDown = 0; inputList[i].gameFunction = Shoot_Button_Down; inputList[i].inpNum = hexVal;
         i++;
       }
+      else if (strstr(line,"Mouse Manual Reset = ")!=NULL)
+      {
+        removeSubstring(line, "Mouse Manual Reset = ");
+        sscanf(line, "%x", &hexVal);
+        inputList[i].isDown = 0; inputList[i].gameFunction = ResetPos; inputList[i].inpNum = hexVal;
+        i++;
+      }
       else if (strstr(line,"ADS = ")!=NULL)
       {
         removeSubstring(line, "ADS = ");
@@ -123,6 +130,7 @@ struct Input* COD_Input_Reader()
       
       fprintf(CODInputs, "Shoot = 0x01\n");
       fprintf(CODInputs, "ADS = 0x02\n");
+      fprintf(CODInputs, "Mouse Manual Reset = 0x04\n");
       fprintf(CODInputs, "Swap Weapon = 0x31\n");
       fprintf(CODInputs, "Swap To Grenade = 0x32\n");
       fprintf(CODInputs, "Swap Grenade Type = 0x51\n");
@@ -137,7 +145,7 @@ struct Input* COD_Input_Reader()
       // Close the CODInputs
       fclose(CODInputs);
       
-      totalInputs = 10;
+      totalInputs = 11;
       
       //open the recently created input file
       FILE* CODInputs = fopen("DS_COD_Controls.txt", "r");
@@ -168,7 +176,7 @@ struct Input* COD_Input_Reader()
     {
       //printf("%s", line);
       line[strcspn(line, "\n")] = '\0';
-      if ((strstr(line,"Shoot = ")!=NULL) || (strstr(line,"ADS = ")!=NULL) || strstr(line,"Swap Weapon = ")!=NULL || strstr(line,"Swap To Grenade = ")!=NULL || strstr(line,"Swap Grenade Type = ")!=NULL || strstr(line,"Swap To Melee = ")!=NULL || strstr(line,"Reload = ")!=NULL || strstr(line,"Interact = ")!=NULL || strstr(line,"Crouch = ")!=NULL || strstr(line,"Sprint = ")!=NULL/* || strstr(line,"Pause = ")!=NULL || strstr(line,"Kill = ")!=NULL*/)
+      if ((strstr(line,"Shoot = ")!=NULL) || (strstr(line,"ADS = ")!=NULL) || (strstr(line,"Mouse Manual Reset = ")!=NULL) || strstr(line,"Swap Weapon = ")!=NULL || strstr(line,"Swap To Grenade = ")!=NULL || strstr(line,"Swap Grenade Type = ")!=NULL || strstr(line,"Swap To Melee = ")!=NULL || strstr(line,"Reload = ")!=NULL || strstr(line,"Interact = ")!=NULL || strstr(line,"Crouch = ")!=NULL || strstr(line,"Sprint = ")!=NULL/* || strstr(line,"Pause = ")!=NULL || strstr(line,"Kill = ")!=NULL*/)
       {
        totalInputs++;
       }

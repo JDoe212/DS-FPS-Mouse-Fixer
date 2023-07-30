@@ -32,6 +32,13 @@ void GenerateInputs_MPH(FILE *inputFile, struct Input* inputList)
         inputList[i].isDown = 0; inputList[i].gameFunction = Shoot_Button_Down; inputList[i].inpNum = hexVal;
         i++;
       }
+      else if (strstr(line,"Mouse Manual Reset = ")!=NULL)
+      {
+        removeSubstring(line, "Mouse Manual Reset = ");
+        sscanf(line, "%x", &hexVal);
+        inputList[i].isDown = 0; inputList[i].gameFunction = ResetPos; inputList[i].inpNum = hexVal;
+        i++;
+      }
       else if (strstr(line,"Swap To Main Weapon = ")!=NULL)
       {
         removeSubstring(line, "Swap To Main Weapon = ");
@@ -143,6 +150,7 @@ struct Input* MPH_Input_Reader()
       fprintf(MPHInputs, "Edit Controls for Metroid Prime Hunters in this file.\nInputs must be denoted by their corresponding hex values as denoted here: \nhttps://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes \n\n");
       
       fprintf(MPHInputs, "Shoot = 0x01\n");
+      fprintf(MPHInputs, "Mouse Manual Reset = 0x04\n");
       fprintf(MPHInputs, "Swap To Main Weapon = 0x51\n");
       fprintf(MPHInputs, "Swap To Missiles = 0x45\n");
       fprintf(MPHInputs, "Swap To Third Weapon = 0x52\n");
@@ -160,13 +168,13 @@ struct Input* MPH_Input_Reader()
       // Close the MPHInputs
       fclose(MPHInputs);
 
-      totalInputs = 14;
+      totalInputs = 15;
 
       //open the recently created input file
       FILE* MPHInputs = fopen("DS_MPH_Controls.txt", "r");
 
       //create the inputstruct list, the length set to the default number of inputs from the generic inputs.txt
-      struct Input* inputList = malloc(14 * sizeof(struct Input));
+      struct Input* inputList = malloc(totalInputs * sizeof(struct Input));
       
       //Generate the inputs
       GenerateInputs_MPH(MPHInputs, inputList);
@@ -191,9 +199,9 @@ struct Input* MPH_Input_Reader()
     //Read the text file line by line, and count the number of inputs that need to be in the inputstruct list
     while (fgets(line, sizeof(line), MPHInputs) != NULL) 
     {
-      //printf("%s", line);
+      //printf("%s", line); Mouse Manual Reset
       line[strcspn(line, "\n")] = '\0';
-      if ((strstr(line,"Shoot = ")!=NULL) || (strstr(line,"Swap To Main Weapon = ")!=NULL) || strstr(line,"Swap To Missiles = ")!=NULL || strstr(line,"Swap To Third Weapon = ")!=NULL || strstr(line,"Special Weapon 1 = ")!=NULL || strstr(line,"Special Weapon 2 = ")!=NULL || strstr(line,"Special Weapon 3 = ")!=NULL || strstr(line,"Special Weapon 4 = ")!=NULL || strstr(line,"Special Weapon 5 = ")!=NULL || strstr(line,"Special Weapon 6 = ")!=NULL || strstr(line,"Scan Vision = ")!=NULL || strstr(line,"Ball = ")!=NULL || strstr(line,"Screen Tap Jump = ")!=NULL || strstr(line,"Zoom = ")!=NULL)
+      if ((strstr(line,"Shoot = ")!=NULL) || (strstr(line,"Mouse Manual Reset = ")!=NULL) || (strstr(line,"Swap To Main Weapon = ")!=NULL) || strstr(line,"Swap To Missiles = ")!=NULL || strstr(line,"Swap To Third Weapon = ")!=NULL || strstr(line,"Special Weapon 1 = ")!=NULL || strstr(line,"Special Weapon 2 = ")!=NULL || strstr(line,"Special Weapon 3 = ")!=NULL || strstr(line,"Special Weapon 4 = ")!=NULL || strstr(line,"Special Weapon 5 = ")!=NULL || strstr(line,"Special Weapon 6 = ")!=NULL || strstr(line,"Scan Vision = ")!=NULL || strstr(line,"Ball = ")!=NULL || strstr(line,"Screen Tap Jump = ")!=NULL || strstr(line,"Zoom = ")!=NULL)
       {
        totalInputs++;
       }

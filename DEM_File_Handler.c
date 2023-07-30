@@ -34,6 +34,13 @@ void GenerateInputs_DEM(FILE *inputFile, struct Input* inputList)
         inputList[i].isDown = 0; inputList[i].gameFunction = Shoot_Button_Down; inputList[i].inpNum = hexVal;
         i++;
       }
+      else if (strstr(line,"Mouse Manual Reset = ")!=NULL)
+      {
+        removeSubstring(line, "Mouse Manual Reset = ");
+        sscanf(line, "%x", &hexVal);
+        inputList[i].isDown = 0; inputList[i].gameFunction = ResetPos; inputList[i].inpNum = hexVal;
+        i++;
+      }
       else if (strstr(line,"Next Weapon = ")!=NULL)
       {
         removeSubstring(line, "Next Weapon = ");
@@ -300,10 +307,11 @@ struct Input* DEM_Input_Reader()
       fprintf(DEMInputs, "Edit Controls for Dementium The Ward and Dementium II in this file.\nInputs must be denoted by their corresponding hex values as denoted here: \nhttps://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes \n\n");
       
       fprintf(DEMInputs, "Shoot = 0x01\n");
+      fprintf(DEMInputs, "Mouse Manual Reset = 0x04\n");
       fprintf(DEMInputs, "Next Weapon = 0x05\n");
       fprintf(DEMInputs, "Interact = 0x45\n");
       fprintf(DEMInputs, "Items = 0x47\n");
-      fprintf(DEMInputs, "Resume = 0x32\n");
+      fprintf(DEMInputs, "Resume = 0x56\n");
       fprintf(DEMInputs, "Map = 0x4D\n");
       fprintf(DEMInputs, "Sprint = 0xA0\n");
 
@@ -329,7 +337,7 @@ struct Input* DEM_Input_Reader()
       // Close the DEMInputs
       fclose(DEMInputs);
 
-      totalInputs = 21;
+      totalInputs = 22;
 
       //open the recently created input file
       FILE* DEMInputs = fopen("DS_DEM_Controls.txt", "r");
@@ -361,7 +369,7 @@ struct Input* DEM_Input_Reader()
     {
       //printf("%s", line);
       line[strcspn(line, "\n")] = '\0';
-      if ((strstr(line,"Shoot = ")!=NULL) || (strstr(line,"Notepad = ")!=NULL) || (strstr(line,"Sprint = ")!=NULL) || strstr(line,"Interact = ")!=NULL || strstr(line,"Items = ")!=NULL || strstr(line,"Resume = ")!=NULL || strstr(line,"Map = ")!=NULL || strstr(line,"Next Weapon = ")!=NULL || strstr(line,"Hotbar 1 = ")!=NULL || strstr(line,"Hotbar 2 = ")!=NULL || strstr(line,"Hotbar 3 = ")!=NULL || strstr(line,"Hotbar 4 = ")!=NULL || strstr(line,"Hotbar 5 = ")!=NULL || strstr(line,"Hotbar 6 = ")!=NULL || strstr(line,"Hotbar 7 = ")!=NULL || strstr(line,"Hotbar 8 = ")!=NULL || (strstr(line,"Jump = ")!=NULL) || (strstr(line,"Crouch = ")!=NULL) || (strstr(line,"Flashlight = ")!=NULL) || (strstr(line,"Reload = ")!=NULL) || (strstr(line,"Equipment = ")!=NULL))
+      if ((strstr(line,"Shoot = ")!=NULL) || (strstr(line,"Mouse Manual Reset = ")!=NULL) || (strstr(line,"Notepad = ")!=NULL) || (strstr(line,"Sprint = ")!=NULL) || strstr(line,"Interact = ")!=NULL || strstr(line,"Items = ")!=NULL || strstr(line,"Resume = ")!=NULL || strstr(line,"Map = ")!=NULL || strstr(line,"Next Weapon = ")!=NULL || strstr(line,"Hotbar 1 = ")!=NULL || strstr(line,"Hotbar 2 = ")!=NULL || strstr(line,"Hotbar 3 = ")!=NULL || strstr(line,"Hotbar 4 = ")!=NULL || strstr(line,"Hotbar 5 = ")!=NULL || strstr(line,"Hotbar 6 = ")!=NULL || strstr(line,"Hotbar 7 = ")!=NULL || strstr(line,"Hotbar 8 = ")!=NULL || (strstr(line,"Jump = ")!=NULL) || (strstr(line,"Crouch = ")!=NULL) || (strstr(line,"Flashlight = ")!=NULL) || (strstr(line,"Reload = ")!=NULL) || (strstr(line,"Equipment = ")!=NULL))
       {
        totalInputs++;
       }
