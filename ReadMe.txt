@@ -5,6 +5,19 @@ This tool aims to make DS FPS games more enjoyable by adding custom inputs that 
 
 HOW TO USE
 
+First we must make sure that your melon DS inputs match the scripts requirements,
+those should look like this:
+
+up, down, left, right = can be whatever buttons you see fit, as long as they are not listed below
+Y, A, B = can be whatever buttons you see fit, as long as they are not listed below
+Select, Start = can be whatever buttons you see fit, as long as they are not listed below
+
+X = Space key
+
+L = N key
+
+R = M key
+
 You do not need to create any config files ahead of time in fact I recommend you dont and let the script write them for you
 
 Before getting started REMEMBER, Kill the program at any time with BACKSPACE and Pause it at any time with RIGHT_SHIFT
