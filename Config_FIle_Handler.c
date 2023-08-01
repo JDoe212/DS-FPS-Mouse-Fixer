@@ -31,7 +31,7 @@ void ConfigReader()
     if (ConFile != NULL) 
     {
       // Write data to the ConFile if needed
-      fprintf(ConFile, "\nVALUES\n\n");
+      fprintf(ConFile, "VALUES\n\n");
       fprintf(ConFile, "mouseResetWait = 35\nbuttonWait = 120\nswapWait = 220\nkeyWait = 50\n\n");
       
       // Close the ConFile

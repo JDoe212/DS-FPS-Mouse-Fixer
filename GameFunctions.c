@@ -19,6 +19,8 @@ float screenWidthRatio, screenHeightRatio, referenceWidth = 587, referenceHeight
 float distanceFromBoarderSides = 50, distanceFromBoarderTop = 100, distanceNextButton = 100;
 float mouseResetWait = 35, buttonWait = 100, swapWait = 220, keyWait = 50;
 
+RECT playSpace;
+
 POINT center;
 
 //This is the function that initializes the playspace of the user's stylus screen
@@ -57,6 +59,13 @@ int InitializePoints(POINT* bottomLeft, POINT* topRight)
             topBound = topRight->y;
             bottomBound = bottomLeft->y;
             
+            SetRect(&playSpace, leftBound, topBound, rightBound, bottomBound);
+
+            leftBound += 1;
+            rightBound -= 1;
+            topBound += 1;
+            bottomBound -= 1;
+
             //determine the width and height of the playspace
             float screenWidth = rightBound - leftBound;
             float screenHeight = bottomBound - topBound;
@@ -105,15 +114,26 @@ void Pause()
   SwapMouseButton(paused);
   Shoot_Button_Up();
   paused = !paused;
+  if (paused)
+  {
+    ClipCursor(NULL);
+  }
+  else
+  {
+    ResetPos();
+    //LockPlaySpace();
+  }
 }
 
 //kill the script, can be unkilled
 void Kill()
 {
   on = 0;
+  paused=1;
   mouse_event(mouseUp,0,0,0,0);
   Shoot_Button_Up();
   SwapMouseButton(0);
+  ClipCursor(NULL);
 }
 
 //a script that does nothing to fill space in some of the input structs
