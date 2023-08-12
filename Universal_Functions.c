@@ -5,6 +5,7 @@ purpose: This file contains functions that are used in each of the other "XXX_Fu
 extern int mouseUp, mouseDown, activeMouse;
 
 extern float mouseResetWait, buttonWait, swapWait, keyWait;
+extern int autoMouseDrag;
 
 extern RECT playSpace;
 
@@ -66,7 +67,10 @@ void ResetPos()
   mouse_event(mouseUp,0,0,0,0);
   GetActiveMouseUp(&mouseResetWait);
   SetCursorPos(center.x,center.y);
-  mouse_event(mouseDown,0,0,0,0);
+  if (autoMouseDrag)
+  {
+    mouse_event(mouseDown,0,0,0,0);
+  }
   GetClipCursor(&tempRect);
   if (tempRect.left != playSpace.left && tempRect.right != playSpace.right && tempRect.top != playSpace.top && tempRect.bottom != playSpace.bottom)
   {
@@ -81,6 +85,9 @@ int ResetPosAfterButton()
   mouse_event(mouseUp,0,0,0,0);
   GetActiveMouseUp(&buttonWait);
   SetCursorPos(center.x,center.y);
-  mouse_event(mouseDown,0,0,0,0);
+  if (autoMouseDrag)
+  {
+    mouse_event(mouseDown,0,0,0,0);
+  }
   return 0;
 }

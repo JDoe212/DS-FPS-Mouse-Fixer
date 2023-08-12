@@ -5,7 +5,7 @@ purpose: This file contains the mainloop for the script, it initializes the play
 #include "FileHandler.c"
 #include <winuser.h>
 
-extern int on, paused;
+extern int on, paused, autoMouseDrag;
 
 extern POINT center;
 
@@ -43,7 +43,7 @@ int Run()
     {
       //get the cursor position and if out of playspace, reset
       GetCursorPos(&cursorPos);
-      if (cursorPos.x>=rightBound || cursorPos.x<=leftBound || cursorPos.y>=bottomBound || cursorPos.y<=topBound)
+      if ((cursorPos.x>=rightBound || cursorPos.x<=leftBound || cursorPos.y>=bottomBound || cursorPos.y<=topBound) && autoMouseDrag)
       {
         ResetPos(&center);
       }
