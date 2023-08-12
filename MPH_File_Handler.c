@@ -130,6 +130,41 @@ void GenerateInputs_MPH(FILE *inputFile, struct Input* inputList)
         inputList[i].isDown = 0; inputList[i].gameFunction = ADS_COD4; inputList[i].inpNum = hexVal;
         i++;
       }
+      else if (strstr(line,"Ok (menu) = ")!=NULL)
+      {
+        removeSubstring(line, "Ok (menu) = ");
+        sscanf(line, "%x", &hexVal);
+        inputList[i].isDown = 0; inputList[i].gameFunction = ClickOK_MPH; inputList[i].inpNum = hexVal;
+        i++;
+      }
+      else if (strstr(line,"Yes (menu) = ")!=NULL)
+      {
+        removeSubstring(line, "Yes (menu) = ");
+        sscanf(line, "%x", &hexVal);
+        inputList[i].isDown = 0; inputList[i].gameFunction = ClickYes_MPH; inputList[i].inpNum = hexVal;
+        i++;
+      }
+      else if (strstr(line,"No (menu) = ")!=NULL)
+      {
+        removeSubstring(line, "No (menu) = ");
+        sscanf(line, "%x", &hexVal);
+        inputList[i].isDown = 0; inputList[i].gameFunction = ClickNo_MPH; inputList[i].inpNum = hexVal;
+        i++;
+      }
+      else if (strstr(line,"Left (menu) = ")!=NULL)
+      {
+        removeSubstring(line, "Left (menu) = ");
+        sscanf(line, "%x", &hexVal);
+        inputList[i].isDown = 0; inputList[i].gameFunction = Left_MPH; inputList[i].inpNum = hexVal;
+        i++;
+      }
+      else if (strstr(line,"Right (menu) = ")!=NULL)
+      {
+        removeSubstring(line, "Right (menu) = ");
+        sscanf(line, "%x", &hexVal);
+        inputList[i].isDown = 0; inputList[i].gameFunction = Right_MPH; inputList[i].inpNum = hexVal;
+        i++;
+      }
     }
 }
 
@@ -163,12 +198,17 @@ struct Input* MPH_Input_Reader()
       fprintf(MPHInputs, "Scan Vision = 0x56\n");
       fprintf(MPHInputs, "Ball = 0xA2\n");
       fprintf(MPHInputs, "Screen Tap Jump = 0xA3\n");
-      fprintf(MPHInputs, "Zoom = 0x02");
+      fprintf(MPHInputs, "Zoom = 0x02\n");
+      fprintf(MPHInputs, "Ok (menu) = 0x46\n");
+      fprintf(MPHInputs, "Yes (menu) = 0x05\n");
+      fprintf(MPHInputs, "No (menu) = 0x06\n");
+      fprintf(MPHInputs, "Left (menu) = 0x5A\n");
+      fprintf(MPHInputs, "Right (menu) = 0x43\n");
       
       // Close the MPHInputs
       fclose(MPHInputs);
 
-      totalInputs = 15;
+      totalInputs = 20;
 
       //open the recently created input file
       FILE* MPHInputs = fopen("DS_MPH_Controls.txt", "r");
@@ -201,7 +241,7 @@ struct Input* MPH_Input_Reader()
     {
       //printf("%s", line); Mouse Manual Reset
       line[strcspn(line, "\n")] = '\0';
-      if ((strstr(line,"Shoot = ")!=NULL) || (strstr(line,"Mouse Manual Reset = ")!=NULL) || (strstr(line,"Swap To Main Weapon = ")!=NULL) || strstr(line,"Swap To Missiles = ")!=NULL || strstr(line,"Swap To Third Weapon = ")!=NULL || strstr(line,"Special Weapon 1 = ")!=NULL || strstr(line,"Special Weapon 2 = ")!=NULL || strstr(line,"Special Weapon 3 = ")!=NULL || strstr(line,"Special Weapon 4 = ")!=NULL || strstr(line,"Special Weapon 5 = ")!=NULL || strstr(line,"Special Weapon 6 = ")!=NULL || strstr(line,"Scan Vision = ")!=NULL || strstr(line,"Ball = ")!=NULL || strstr(line,"Screen Tap Jump = ")!=NULL || strstr(line,"Zoom = ")!=NULL)
+      if ((strstr(line,"Shoot = ")!=NULL) || (strstr(line,"Mouse Manual Reset = ")!=NULL) || (strstr(line,"Swap To Main Weapon = ")!=NULL) || strstr(line,"Swap To Missiles = ")!=NULL || strstr(line,"Swap To Third Weapon = ")!=NULL || strstr(line,"Special Weapon 1 = ")!=NULL || strstr(line,"Special Weapon 2 = ")!=NULL || strstr(line,"Special Weapon 3 = ")!=NULL || strstr(line,"Special Weapon 4 = ")!=NULL || strstr(line,"Special Weapon 5 = ")!=NULL || strstr(line,"Special Weapon 6 = ")!=NULL || strstr(line,"Scan Vision = ")!=NULL || strstr(line,"Ball = ")!=NULL || strstr(line,"Screen Tap Jump = ")!=NULL || strstr(line,"Zoom = ")!=NULL || strstr(line,"Ok (menu) = ")!=NULL || strstr(line,"Yes (menu) = ")!=NULL || strstr(line,"No (menu) = ")!=NULL || strstr(line,"Left (menu) = ")!=NULL || strstr(line,"Right (menu) = ")!=NULL)
       {
        totalInputs++;
       }

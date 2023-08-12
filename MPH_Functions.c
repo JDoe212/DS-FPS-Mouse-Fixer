@@ -40,6 +40,7 @@ void ScanVision_MPH()
   CursorUp();
   SetCursorPos(center.x, bottomBound - distanceFromBoarderTop/2);
   mouse_event(mouseDown,0,0,0,0);
+  Sleep(500);
   ResetPosAfterButton();
 }
 
@@ -117,6 +118,46 @@ void Zoom_MPH()
   keybd_event('M', 0, 0, 0);
   Sleep(keyWait);
   keybd_event('M', 0, KEYEVENTF_KEYUP, 0);
+}
+
+void ClickOK_MPH()
+{
+  CursorUp();
+  SetCursorPos(center.x, bottomBound - distanceFromBoarderTop*1.2);
+  mouse_event(mouseDown,0,0,0,0);
+  ResetPosAfterButton();
+}
+
+void ClickYes_MPH()
+{
+  CursorUp();
+  SetCursorPos(center.x - distanceFromBoarderSides*2, bottomBound - distanceFromBoarderTop*1.2);
+  mouse_event(mouseDown,0,0,0,0);
+  ResetPosAfterButton();
+}
+
+void ClickNo_MPH()
+{
+  CursorUp();
+  SetCursorPos(center.x + distanceFromBoarderSides*2, bottomBound - distanceFromBoarderTop*1.2);
+  mouse_event(mouseDown,0,0,0,0);
+  ResetPosAfterButton();
+}
+
+void Left_MPH()
+{
+  CursorUp();
+  SetCursorPos(center.x - distanceFromBoarderSides*2.5, bottomBound - distanceFromBoarderTop*1.2);
+  mouse_event(mouseDown,0,0,0,0);
+  ResetPosAfterButton();
+}
+
+void Right_MPH()
+{
+  CursorUp();
+  SetCursorPos(center.x + distanceFromBoarderSides*2.5, bottomBound - distanceFromBoarderTop*1.2);
+  mouse_event(mouseDown,0,0,0,0);
+  ResetPosAfterButton();
 }
 
 /*void LeftStrafe_MPH()
